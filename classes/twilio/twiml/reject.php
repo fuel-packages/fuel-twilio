@@ -15,7 +15,14 @@ namespace Twilio;
 
 class Twilio_Twiml_Reject extends Twilio_Twiml_Verb {
 
+    /**
+     * @var boolean Does the element have a noun
+     */
     protected $has_noun = false;
+
+    /**
+     * @var array Stored default attributes
+     */
     protected $default = array(
         'reason' => 'rejected'
     );

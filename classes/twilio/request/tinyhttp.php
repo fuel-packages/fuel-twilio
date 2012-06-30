@@ -16,7 +16,7 @@ namespace Twilio;
 class Twilio_Request_TinyHttpException extends \FuelException {}
 
 class Twilio_Request_TinyHttp {
-  var $user, $pass, $scheme, $host, $port, $debug, $curlopts;
+  private $user, $pass, $scheme, $host, $port, $debug, $curlopts;
 
   public function __construct($uri = '', $kwargs = array()) {
     foreach (parse_url($uri) as $name => $value) $this->$name = $value;

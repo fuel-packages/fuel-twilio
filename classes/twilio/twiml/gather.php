@@ -15,7 +15,14 @@ namespace Twilio;
 
 class Twilio_Twiml_Gather extends Twilio_Twiml_Nest {
 
+    /**
+     * @var array Stored an array of allowed_nested objects 
+     */
     protected $noun = array();
+
+    /**
+     * @var array Stored default attributes
+     */
     protected $default = array(
         'action' => '',
         'method' => 'POST',
@@ -23,6 +30,10 @@ class Twilio_Twiml_Gather extends Twilio_Twiml_Nest {
         'finishOnKey' => '#',
         'numDigits' => ''
     );
+
+    /**
+     * @var array An array of allowed nested objects
+     */
     protected $allowed_nested = array(
         'Twilio\\Twilio_Twiml_Say',
         'Twilio\\Twilio_Twiml_Play',

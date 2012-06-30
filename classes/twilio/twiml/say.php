@@ -15,6 +15,9 @@ namespace Twilio;
 
 class Twilio_Twiml_Say extends Twilio_Twiml_Verb {
 
+    /**
+     * @var array Stored default attributes
+     */
     protected $default = array(
         'voice' => 'man',
         'language' => 'en',

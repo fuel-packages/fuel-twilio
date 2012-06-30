@@ -13,13 +13,29 @@
 
 namespace Twilio;
 
+class Twilio_Twiml_Exception extends \FuelException {
+    
+}
+
 class Twilio_Twiml {
 
+    /**
+     * Returns a new Twilio_Request object 
+     * 
+     * @return Twilio_Request
+     */
     public static function forge() {
         return new static();
     }
 
+    /**
+     * @var array An array of verbs 
+     */
     private $verbs = array();
+
+    /**
+     * @var array An array of allowed verbs 
+     */
     private $allowed_verbs = array(
         'say',
         'play',
@@ -39,13 +55,19 @@ class Twilio_Twiml {
         'conference'
     );
 
+    /**
+     *
+     * @param string $verb Name the of the element
+     * @param array $args Method arguments
+     * @return Twilio_Twiml Return the object to enable chaining
+     * @throws Twilio_Twiml_Exception 
+     */
     public function __call($verb, $args = array()) {
-
         if ($verb == 'render') {
             return $this->render();
         }
 
-        if (!in_array($verb, $this->allowed_verbs) && !array_key_exists($verb, $this->allowed_verbs)) {
+        if (!in_array($verb, $this->allowed_verbs) and !array_key_exists($verb, $this->allowed_verbs)) {
             throw new Twilio_Twiml_Exception($verb . ' is invalid');
         }
         if (in_array($verb, $this->allowed_verbs)) {
@@ -55,6 +77,14 @@ class Twilio_Twiml {
         }
     }
 
+    /**
+     *
+     * @param string $verb
+     * @param array $attr An associative array of attributes
+     * @param mixed $noun The element noun
+     * @return Twilio_Twiml Return the object to enable chaining
+     * @throws Twilio_Twiml_Exception 
+     */
     private function verb($verb, $attr = array(), $noun = '') {
         $class = 'Twilio_Twiml_' . ucwords(strtolower($verb));
         if (class_exists($class)) {
@@ -65,6 +95,11 @@ class Twilio_Twiml {
         return $this;
     }
 
+    /**
+     * Renders the Twiml document
+     * 
+     * @return string An Twiml document
+     */
     public function render() {
         $nl = "\n";
         $twiml = '<?xml version="1.0" encoding="UTF-8" ?>' . $nl;
@@ -76,12 +111,14 @@ class Twilio_Twiml {
         return $twiml;
     }
 
+    /**
+     * Returns an array of verbs 
+     * 
+     * @return array An array of verbs 
+     */
     public function verbs() {
         return $this->verbs;
     }
 
 }
 
-class Twilio_Twiml_Exception extends \FuelException {
-    
-}

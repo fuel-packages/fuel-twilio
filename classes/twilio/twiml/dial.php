@@ -15,7 +15,14 @@ namespace Twilio;
 
 class Twilio_Twiml_Dial extends Twilio_Twiml_Nest {
 
+    /**
+     * @var array Stored an array of allowed_nested objects 
+     */
     protected $noun = array();
+
+    /**
+     * @var array Stored default attributes
+     */
     protected $default = array(
         'action' => '',
         'method' => 'POST',
@@ -25,6 +32,10 @@ class Twilio_Twiml_Dial extends Twilio_Twiml_Nest {
         'callerId' => '',
         'record' => 'false',
     );
+
+    /**
+     * @var array An array of allowed nested objects
+     */
     protected $allowed_nested = array(
         'Twilio\\Twilio_Twiml_Number',
         'Twilio\\Twilio_Twiml_Client',

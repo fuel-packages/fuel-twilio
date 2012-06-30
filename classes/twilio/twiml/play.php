@@ -15,6 +15,9 @@ namespace Twilio;
 
 class Twilio_Twiml_Play extends Twilio_Twiml_Verb {
 
+    /**
+     * @var array Stored default attributes
+     */
     protected $default = array(
         'loop' => '1'
     );

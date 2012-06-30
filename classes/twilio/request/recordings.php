@@ -15,6 +15,9 @@ namespace Twilio;
 
 class Twilio_Request_Recordings extends Twilio_Request implements Twilio_Request_Base {
 
+    /**
+     * @var array Stored default attributes
+     */
     protected $defaults = array(
         'Sid' => false,
         'CallSid' => false,
@@ -22,8 +25,18 @@ class Twilio_Request_Recordings extends Twilio_Request implements Twilio_Request
         'Page' => false,
         'PageSize' => 50
     );
+
+    /**
+     * @var string Stores Request URI
+     */
     protected $res = '/2010-04-01/Accounts/%s/Recordings%s.json';
 
+    /**
+     * Executes the request, returning the response
+     * 
+     * @param array $attr An associative array of attributes for the request
+     * @return stdClass An json_decoded object of the response 
+     */
     public function create($attr = array()) {
         $sid = (!empty($attr['Sid'])) ? '/' . $attr['Sid'] : '';
 
@@ -48,6 +61,12 @@ class Twilio_Request_Recordings extends Twilio_Request implements Twilio_Request
         return $response;
     }
 
+    /**
+     * Executes the request, deleting the recording
+     * 
+     * @param string $sid 
+     * @return stdClass An json_decoded object of the response 
+     */
     public function delete($sid) {
         $res = sprintf($this->res, \Config::get('twilio.account_sid'), '/' . $sid, '');
         return $this->send($res, '', 'DELETE');

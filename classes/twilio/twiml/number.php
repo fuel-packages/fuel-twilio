@@ -15,6 +15,9 @@ namespace Twilio;
 
 class Twilio_Twiml_Number extends Twilio_Twiml_Verb {
 
+    /**
+     * @var array Stored default attributes
+     */
     protected $default = array(
         'sendDigits' => '',
         'url' => ''
