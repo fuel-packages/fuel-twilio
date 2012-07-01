@@ -83,7 +83,7 @@ Will render:
 	<?xml version="1.0" encoding="UTF-8" ?>
 		<Response>
 			<Say voice="man" language="en" loop="1">Hello World!</Say>
-			<Pause loop="5" />
+			<Pause length="5" />
 		</Gather>
 	</Response>
 
