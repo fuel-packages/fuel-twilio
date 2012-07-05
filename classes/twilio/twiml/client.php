@@ -13,6 +13,6 @@
 
 namespace Twilio;
 
-class Twilio_Twiml_Client extends Twilio_Twiml_Verb {
-
+class Twilio_Twiml_Client extends Twilio_Twiml_Verb
+{
 }

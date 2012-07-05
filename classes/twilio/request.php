@@ -14,14 +14,14 @@
 namespace Twilio;
 
 /**
- * Exception for Twilio_Request 
+ * Exception for Twilio_Request
  */
 class Twilio_Request_Exception extends \FuelException {}
 
-abstract class Twilio_Request {
-
+abstract class Twilio_Request
+{
     /**
-     * @var string Request user agent 
+     * @var string Request user agent
      */
     private $useragent = 'fuel-twilio/0.1';
 
@@ -54,22 +54,24 @@ abstract class Twilio_Request {
      * @var string Stores Request URI
      */
     protected $res = '';
-    
+
     /**
-     * Returns a new Twilio_Request object 
-     * 
+     * Returns a new Twilio_Request object
+     *
      * @return Twilio_Request
      */
-    public static function forge() {
+    public static function forge()
+    {
         return new static();
     }
 
     /**
      * Twilio_Request constructor
-     * 
-     * @throws Twilio_Request_Exception 
+     *
+     * @throws Twilio_Request_Exception
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->cainfo = realpath(dirname(__FILE__) . '/../' . $this->cainfo);
 
         if (!in_array('curl', get_loaded_extensions())) {
@@ -90,17 +92,18 @@ abstract class Twilio_Request {
         \Config::load('twilio', true);
         $this->_http->authenticate(\Config::get('twilio.account_sid'), \Config::get('twilio.auth_token'));
     }
-    
+
     /**
      * Sends the Twilio request
-     * 
-     * @param string $res
-     * @param string $body
-     * @param string $method
-     * @return stdClass An json_decoded object of the response 
-     * @throws Twilio_Request_Exception 
+     *
+     * @param  string                   $res
+     * @param  string                   $body
+     * @param  string                   $method
+     * @return stdClass                 An json_decoded object of the response
+     * @throws Twilio_Request_Exception
      */
-    protected function send($res, $body = '', $method = 'POST') {
+    protected function send($res, $body = '', $method = 'POST')
+    {
         $method = strtolower($method);
         if (!in_array($method, array('post', 'get', 'put', 'delete'))) {
             throw new Twilio_Request_Exception('Invalid http method');
@@ -110,16 +113,18 @@ abstract class Twilio_Request {
             $body = '';
         }
         $response = $this->_http->$method($res, array(), $body);
+
         return json_decode($response[2]);
     }
-    
+
     /**
      * Creates and returns a http query string
-     * 
-     * @param array $attr An associative array of attributes
-     * @return string A http query string 
+     *
+     * @param  array  $attr An associative array of attributes
+     * @return string A http query string
      */
-    protected function create_post($attr = array()) {
+    protected function create_post($attr = array())
+    {
         $post = array();
 
         foreach ($this->defaults as $k => $v) {
@@ -129,6 +134,7 @@ abstract class Twilio_Request {
                 $post[$k] = $v;
             }
         }
+
         return http_build_query($attr);
     }
 

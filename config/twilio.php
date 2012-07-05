@@ -23,7 +23,7 @@ return array(
     'auth_token' => '',
     'from' => '',
     /**
-     * Default TwiML attributes 
+     * Default TwiML attributes
      */
     'tmiml' => array(
         'conference' => array(

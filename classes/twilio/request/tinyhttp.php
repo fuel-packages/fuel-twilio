@@ -15,16 +15,19 @@ namespace Twilio;
 
 class Twilio_Request_TinyHttpException extends \FuelException {}
 
-class Twilio_Request_TinyHttp {
+class Twilio_Request_TinyHttp
+{
   private $user, $pass, $scheme, $host, $port, $debug, $curlopts;
 
-  public function __construct($uri = '', $kwargs = array()) {
+  public function __construct($uri = '', $kwargs = array())
+  {
     foreach (parse_url($uri) as $name => $value) $this->$name = $value;
     $this->debug = isset($kwargs['debug']) ? !!$kwargs['debug'] : NULL;
     $this->curlopts = isset($kwargs['curlopts']) ? $kwargs['curlopts'] : array();
   }
 
-  public function __call($name, $args) {
+  public function __call($name, $args)
+  {
     list($res, $req_headers, $req_body) = $args + array(0, array(), '');
 
     $opts = $this->curlopts + array(
@@ -89,6 +92,7 @@ class Twilio_Request_TinyHttp {
             }
             curl_close($curl);
             if (isset($buf) && is_resource($buf)) fclose($buf);
+
             return array($status, $headers, $body);
           } else throw new Twilio_TinyHttpException(curl_error($curl));
         } else throw new Twilio_TinyHttpException(curl_error($curl));
@@ -100,7 +104,8 @@ class Twilio_Request_TinyHttp {
     }
   }
 
-  public function authenticate($user, $pass) {
+  public function authenticate($user, $pass)
+  {
     $this->user = $user;
     $this->pass = $pass;
   }

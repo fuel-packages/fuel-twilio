@@ -13,8 +13,8 @@
 
 namespace Twilio;
 
-class Twilio_Twiml_Record extends Twilio_Twiml_Verb {
-
+class Twilio_Twiml_Record extends Twilio_Twiml_Verb
+{
     /**
      * @var boolean Does the element have a noun
      */

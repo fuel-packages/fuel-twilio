@@ -13,8 +13,8 @@
 
 namespace Twilio;
 
-class Twilio_Request_Recordings extends Twilio_Request implements Twilio_Request_Base {
-
+class Twilio_Request_Recordings extends Twilio_Request implements Twilio_Request_Base
+{
     /**
      * @var array Stored default attributes
      */
@@ -33,11 +33,12 @@ class Twilio_Request_Recordings extends Twilio_Request implements Twilio_Request
 
     /**
      * Executes the request, returning the response
-     * 
-     * @param array $attr An associative array of attributes for the request
-     * @return stdClass An json_decoded object of the response 
+     *
+     * @param  array    $attr An associative array of attributes for the request
+     * @return stdClass An json_decoded object of the response
      */
-    public function create($attr = array()) {
+    public function create($attr = array())
+    {
         $sid = (!empty($attr['Sid'])) ? '/' . $attr['Sid'] : '';
 
         $accoundsid = \Config::get('twilio.account_sid');
@@ -58,17 +59,20 @@ class Twilio_Request_Recordings extends Twilio_Request implements Twilio_Request
         } else {
             $response->file = str_replace('.json', '.mp3', $response->uri);
         }
+
         return $response;
     }
 
     /**
      * Executes the request, deleting the recording
-     * 
-     * @param string $sid 
-     * @return stdClass An json_decoded object of the response 
+     *
+     * @param  string   $sid
+     * @return stdClass An json_decoded object of the response
      */
-    public function delete($sid) {
+    public function delete($sid)
+    {
         $res = sprintf($this->res, \Config::get('twilio.account_sid'), '/' . $sid, '');
+
         return $this->send($res, '', 'DELETE');
     }
 

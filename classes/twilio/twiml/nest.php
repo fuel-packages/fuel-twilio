@@ -13,20 +13,21 @@
 
 namespace Twilio;
 
-abstract class Twilio_Twiml_Nest extends Twilio_Twiml_Verb {
-
+abstract class Twilio_Twiml_Nest extends Twilio_Twiml_Verb
+{
     /**
      * @var boolean Does the element has nested objects
      */
     protected $has_nested = true;
 
     /**
-     * Twilio_Twiml_Nest constructor 
-     * 
+     * Twilio_Twiml_Nest constructor
+     *
      * @param array $attr An array of attributes for the element
      * @param mixed $noun Either a string or an array of nested objects
      */
-    public function __construct($attr = array(), $noun = '') {
+    public function __construct($attr = array(), $noun = '')
+    {
         $this->attr = $attr;
 
         if (is_object($noun) && get_class($noun) == 'Twilio\Twilio_Twiml') {
@@ -44,10 +45,11 @@ abstract class Twilio_Twiml_Nest extends Twilio_Twiml_Verb {
 
     /**
      * Renders the Twiml document, overrides Twilio_Twiml_Verb method
-     * 
+     *
      * @return string An Twiml document
      */
-    public function render() {
+    public function render()
+    {
         $attrStr = '';
         $noun = '';
         $verbStr = str_replace('Twilio\\Twilio_Twiml_', '', get_called_class());
@@ -69,6 +71,7 @@ abstract class Twilio_Twiml_Nest extends Twilio_Twiml_Verb {
         $xml = "<{$verbStr}{$attrStr}";
         $noun = trim($noun);
         $xml .= (empty($noun)) ? ' />' : ">\n{$noun}\n</{$verbStr}>";
+
         return $xml;
     }
 

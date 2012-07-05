@@ -37,5 +37,5 @@ Autoloader::add_classes(array(
     'Twilio\\Twilio_Request_MakeCall'		=> __DIR__ . '/classes/twilio/request/makecall.php',
     'Twilio\\Twilio_Request_Accounts'		=> __DIR__ . '/classes/twilio/request/accounts.php',
     'Twilio\\Twilio_Request_Recordings'		=> __DIR__ . '/classes/twilio/request/recordings.php',
-    'Twilio\\Twilio_Request_Transcriptions'	=> __DIR__ . '/classes/twilio/request/transcriptions.php', 
+    'Twilio\\Twilio_Request_Transcriptions'	=> __DIR__ . '/classes/twilio/request/transcriptions.php',
 ));

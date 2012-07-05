@@ -13,10 +13,10 @@
 
 namespace Twilio;
 
-class Twilio_Twiml_Dial extends Twilio_Twiml_Nest {
-
+class Twilio_Twiml_Dial extends Twilio_Twiml_Nest
+{
     /**
-     * @var array Stored an array of allowed_nested objects 
+     * @var array Stored an array of allowed_nested objects
      */
     protected $noun = array();
 

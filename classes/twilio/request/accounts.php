@@ -13,8 +13,8 @@
 
 namespace Twilio;
 
-class Twilio_Request_Accounts extends Twilio_Request implements Twilio_Request_Base {
-
+class Twilio_Request_Accounts extends Twilio_Request implements Twilio_Request_Base
+{
     /**
      * @var array Stored default attributes
      */
@@ -27,12 +27,14 @@ class Twilio_Request_Accounts extends Twilio_Request implements Twilio_Request_B
 
     /**
      * Executes the request, returning the response
-     * 
-     * @param array $attr An associative array of attributes for the request
-     * @return type 
+     *
+     * @param  array $attr An associative array of attributes for the request
+     * @return type
      */
-    public function create($attr = array()) {
+    public function create($attr = array())
+    {
         $res = sprintf($this->res, \Config::get('twilio.account_sid'));
+
         return $this->send($res, '', 'GET');
     }
 

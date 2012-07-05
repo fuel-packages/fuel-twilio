@@ -13,8 +13,8 @@
 
 namespace Twilio;
 
-class Twilio_Request_Transcriptions extends Twilio_Request implements Twilio_Request_Base {
-
+class Twilio_Request_Transcriptions extends Twilio_Request implements Twilio_Request_Base
+{
     /**
      * @var array Stored default attributes
      */
@@ -33,11 +33,12 @@ class Twilio_Request_Transcriptions extends Twilio_Request implements Twilio_Req
 
     /**
      * Executes the request, returning the response
-     * 
-     * @param array $attr An associative array of attributes for the request
-     * @return stdClass An json_decoded object of the response 
+     *
+     * @param  array    $attr An associative array of attributes for the request
+     * @return stdClass An json_decoded object of the response
      */
-    public function create($attr = array()) {
+    public function create($attr = array())
+    {
         $sid = (!empty($attr['Sid'])) ? '/' . $attr['Sid'] : '';
         $accoundsid = \Config::get('twilio.account_sid');
         $accoundsid .= (!empty($attr['RecordingSid'])) ? '/Recordings/' . $attr['RecordingSid'] : '';
@@ -45,6 +46,7 @@ class Twilio_Request_Transcriptions extends Twilio_Request implements Twilio_Req
         unset($attr['Sid'], $attr['RecordingSid']);
         $body = $this->create_post($attr);
         $response = $this->send($res, $body, 'GET');
+
         return $response;
     }
 

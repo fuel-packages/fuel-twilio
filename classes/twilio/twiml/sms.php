@@ -13,8 +13,8 @@
 
 namespace Twilio;
 
-class Twilio_Twiml_Sms extends Twilio_Twiml_Verb {
-
+class Twilio_Twiml_Sms extends Twilio_Twiml_Verb
+{
     /**
      * @var array Stored default attributes
      */

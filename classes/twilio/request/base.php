@@ -13,7 +13,7 @@
 
 namespace Twilio;
 
-interface Twilio_Request_Base {
-
+interface Twilio_Request_Base
+{
     public function create($attr);
 }

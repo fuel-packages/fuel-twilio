@@ -13,8 +13,8 @@
 
 namespace Twilio;
 
-class Twilio_Request_SmsMessage extends Twilio_Request implements Twilio_Request_Base {
-
+class Twilio_Request_SmsMessage extends Twilio_Request implements Twilio_Request_Base
+{
     /**
      * @var array Stored default attributes
      */
@@ -34,11 +34,12 @@ class Twilio_Request_SmsMessage extends Twilio_Request implements Twilio_Request
 
     /**
      * Executes the request, returning the response
-     * 
-     * @param array $attr An associative array of attributes for the request
-     * @return stdClass An json_decoded object of the response 
+     *
+     * @param  array    $attr An associative array of attributes for the request
+     * @return stdClass An json_decoded object of the response
      */
-    public function create($attr = array()) {
+    public function create($attr = array())
+    {
         $sid = (!empty($attr['Sid'])) ? '/' . $attr['Sid'] : '';
 
         $res = sprintf($this->res, \Config::get('twilio.account_sid'), $sid);
@@ -46,6 +47,7 @@ class Twilio_Request_SmsMessage extends Twilio_Request implements Twilio_Request
         unset($attr['Sid']);
 
         $body = $this->create_post($attr);
+
         return $this->send($res, $body);
     }
 

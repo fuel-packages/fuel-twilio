@@ -13,28 +13,29 @@
 
 namespace Twilio;
 
-class Twilio_Twiml_Exception extends \FuelException {
-    
+class Twilio_Twiml_Exception extends \FuelException
+{
 }
 
-class Twilio_Twiml {
-
+class Twilio_Twiml
+{
     /**
-     * Returns a new Twilio_Request object 
-     * 
+     * Returns a new Twilio_Request object
+     *
      * @return Twilio_Request
      */
-    public static function forge() {
+    public static function forge()
+    {
         return new static();
     }
 
     /**
-     * @var array An array of verbs 
+     * @var array An array of verbs
      */
     private $verbs = array();
 
     /**
-     * @var array An array of allowed verbs 
+     * @var array An array of allowed verbs
      */
     private $allowed_verbs = array(
         'say',
@@ -57,12 +58,13 @@ class Twilio_Twiml {
 
     /**
      *
-     * @param string $verb Name the of the element
-     * @param array $args Method arguments
-     * @return Twilio_Twiml Return the object to enable chaining
-     * @throws Twilio_Twiml_Exception 
+     * @param  string                 $verb Name the of the element
+     * @param  array                  $args Method arguments
+     * @return Twilio_Twiml           Return the object to enable chaining
+     * @throws Twilio_Twiml_Exception
      */
-    public function __call($verb, $args = array()) {
+    public function __call($verb, $args = array())
+    {
         if ($verb == 'render') {
             return $this->render();
         }
@@ -73,34 +75,38 @@ class Twilio_Twiml {
         if (in_array($verb, $this->allowed_verbs)) {
             $noun = (isset($args[0])) ? $args[0] : '';
             $attr = (isset($args[1])) ? $args[1] : '';
+
             return $this->verb($verb, $attr, $noun);
         }
     }
 
     /**
      *
-     * @param string $verb
-     * @param array $attr An associative array of attributes
-     * @param mixed $noun The element noun
-     * @return Twilio_Twiml Return the object to enable chaining
-     * @throws Twilio_Twiml_Exception 
+     * @param  string                 $verb
+     * @param  array                  $attr An associative array of attributes
+     * @param  mixed                  $noun The element noun
+     * @return Twilio_Twiml           Return the object to enable chaining
+     * @throws Twilio_Twiml_Exception
      */
-    private function verb($verb, $attr = array(), $noun = '') {
+    private function verb($verb, $attr = array(), $noun = '')
+    {
         $class = 'Twilio_Twiml_' . ucwords(strtolower($verb));
         if (class_exists($class)) {
             $this->verbs[] = new $class($attr, $noun);
         } else {
             throw new Twilio_Twiml_Exception($class . ' does not exist.');
         }
+
         return $this;
     }
 
     /**
      * Renders the Twiml document
-     * 
+     *
      * @return string An Twiml document
      */
-    public function render() {
+    public function render()
+    {
         $nl = "\n";
         $twiml = '<?xml version="1.0" encoding="UTF-8" ?>' . $nl;
         $twiml .= '<Response>' . $nl;
@@ -108,17 +114,18 @@ class Twilio_Twiml {
             $twiml .= $verb->render() . $nl;
         }
         $twiml .= '</Response>' . $nl;
+
         return $twiml;
     }
 
     /**
-     * Returns an array of verbs 
-     * 
-     * @return array An array of verbs 
+     * Returns an array of verbs
+     *
+     * @return array An array of verbs
      */
-    public function verbs() {
+    public function verbs()
+    {
         return $this->verbs;
     }
 
 }
-
