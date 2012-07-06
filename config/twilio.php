@@ -25,7 +25,7 @@ return array(
     /**
      * Default TwiML attributes
      */
-    'tmiml' => array(
+    'twiml' => array(
         'conference' => array(
             'muted' => 'false',
             'beep' => 'true',

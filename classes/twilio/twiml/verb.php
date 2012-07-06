@@ -77,7 +77,7 @@ abstract class Twilio_Twiml_Verb
         \Config::load('twilio', true);
         $verb = str_replace('Twilio\\Twilio_Twiml_', '', get_called_class());
         $attrStr = '';
-        $config = \Config::get('twilio.tmiml.' . strtolower($verb));
+        $config = \Config::get('twilio.twiml.' . strtolower($verb));
         $attr = array_merge($this->default, $config);
         if (is_array($this->attr))
             $attr = array_merge($attr, $this->attr);
