@@ -59,7 +59,7 @@ class Twilio_Request_TinyHttp
           fseek($buf, 0);
           $opts[CURLOPT_INFILE] = $buf;
           $opts[CURLOPT_INFILESIZE] = strlen($req_body);
-        } else throw new Twilio_TinyHttpException('unable to open temporary file');
+        } else throw new Twilio_Request_TinyHttpException('unable to open temporary file');
       }
       break;
     case 'head':
@@ -94,9 +94,9 @@ class Twilio_Request_TinyHttp
             if (isset($buf) && is_resource($buf)) fclose($buf);
 
             return array($status, $headers, $body);
-          } else throw new Twilio_TinyHttpException(curl_error($curl));
-        } else throw new Twilio_TinyHttpException(curl_error($curl));
-      } else throw new Twilio_TinyHttpException('unable to initialize cURL');
+          } else throw new Twilio_Request_TinyHttpException(curl_error($curl));
+        } else throw new Twilio_Request_TinyHttpException(curl_error($curl));
+      } else throw new Twilio_Request_TinyHttpException('unable to initialize cURL');
     } catch (ErrorException $e) {
       if (is_resource($curl)) curl_close($curl);
       if (isset($buf) && is_resource($buf)) fclose($buf);
